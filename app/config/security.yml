@@ -2,12 +2,30 @@
 # https://symfony.com/doc/current/security.html
 security:
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loader
     providers:
-        in_memory:
-            memory: ~
+        our_db_provider:
+            entity:
+                class: AppBundle:User
+                property: username
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
 
     firewalls:
+        default:
+            anonymous: ~
+            http_basic: ~
+            form_login:
+                login_path: /login
+                check_path: /login
+
+                username_parameter: _username
+                password_parameter: _password
+            logout:
+                path: /logout
+                target: /
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
