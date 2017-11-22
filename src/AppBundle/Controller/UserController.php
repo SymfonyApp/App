@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function newAction(Request $request)
     {
-        if($this->get('security.authorization_checker')->isGranted('ROLE_USER'))
+        if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
         {
             throw $this->createAccessDeniedException();
         }
