@@ -1,9 +1,8 @@
 # App
--------------
-Update Entity User
 
-Thêm trường dữ liệu Email và sửa lại trang index, show để hiển thị
-Thêm trường dữ liệu email trong FormUser
-
-Chạy lệnh $php bin/console doctrine:schema:update --force để update database
--------------
+- Cấu hình email trong file config_dev.yml 
+	+ Truyền parameter trong file parameters.yml (transport,user,password)
+- Tạo trang forgot.html.twig
+- Viết hàm fogotAction 
+	+ Random password và update csdl
+	+ Gửi password về email.
