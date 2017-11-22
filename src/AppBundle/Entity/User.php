@@ -41,6 +41,13 @@ class User implements UserInterface
      * @ORM\Column(name="role", type="string", length=255)
      */
     private $role;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
 
 
     /**
@@ -135,6 +142,26 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
     }
 }
 
