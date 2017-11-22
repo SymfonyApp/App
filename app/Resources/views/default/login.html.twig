@@ -18,7 +18,8 @@
         <div class="login">
                 <input type="text" id="username" placeholder="username" name="_username" value="{{ last_username }}" /><br>
                 <input type="password" id="password" placeholder="password" name="_password"><br>
-                <input type="submit" value="Login">
+                <input type="submit" value="Login"/><br><br>
+                <a href="{{ path('forgot') }}">Forgot Password</a>
         </div>
     </div>
 </form>
