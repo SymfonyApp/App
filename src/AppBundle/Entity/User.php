@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * User
  *
@@ -25,6 +26,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length( min= 5, minMessage ="username thấp nhất là 5 kí tự ")
      */
     private $username;
 
@@ -32,6 +35,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length( min= 5, minMessage ="password thấp nhất là 5 kí tự ")
      */
     private $password;
 
@@ -39,12 +44,18 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="role", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $role;
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
