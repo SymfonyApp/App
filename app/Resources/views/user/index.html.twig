@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
+            <tr id="item-"{{user.id}}>
                 <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.role }}</td>
@@ -24,6 +24,8 @@
                     <a class="btn btn-primary" href="{{ path('user_show', { 'id': user.id }) }}">show</a>
                         
                     <a class="btn btn-warning" href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                    <a class="deleteUser btn btn-danger btn-xs glyphicon glyphicon-trash" data-playgroup-id ="{{ user.id }}" >Delete</a>
+                    
                 </td>
             </tr>
         {% endfor %}
@@ -34,4 +36,8 @@
             <a class="btn btn-success" href="{{ path('user_new') }}">Create a new user</a>    
     </ul>
     {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/main.js' )}}"></script>
 {% endblock %}

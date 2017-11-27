@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User controller.
@@ -114,21 +116,18 @@ class UserController extends Controller
     /**
      * Deletes a user entity.
      *
-     * @Route("/{id}", name="user_delete")
+     * @Route("/delete/{id}", name="user_delete", options={"expose"=true})
      * @Method("DELETE")
+     * @param User $id
+     * @return Response
      */
-    public function deleteAction(Request $request, User $user)
+    public function deleteAction(User $id)
     {
-        $form = $this->createDeleteForm($user);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($id);
+        $em->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('user_index');
+        return new Response();   
     }
 
     /**
@@ -146,4 +145,5 @@ class UserController extends Controller
             ->getForm()
         ;
     }
+
 }
