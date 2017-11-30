@@ -1,9 +1,29 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.html.twig' %}
+{% block menu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
 
 {% block body %}
-    <h1>Users list</h1><br>
+    <!-- /.row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h1 class="box-title">Table user</h1>
 
-    <table class ="table table-striped">
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -24,17 +44,25 @@
                     <a class="btn btn-primary" href="{{ path('user_show', { 'id': user.id }) }}">show</a>
                         
                     <a class="btn btn-warning" href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
-                    <a class="deleteUser btn btn-danger btn-xs glyphicon glyphicon-trash" data-playgroup-id ="{{ user.id }}" >Delete</a>
+                    <a class="deleteUser btn btn-danger" data-playgroup-id ="{{ user.id }}" >Delete</a>
                     
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {# display navigation #}
+    <div class="navigation text-center">
+        {{ knp_pagination_render(users) }}
+    </div>
+    </div>
+    </div>
+    <div class="row"  >
     {% if is_granted('ROLE_ADMIN') %}
     <ul>
             <a class="btn btn-success" href="{{ path('user_new') }}">Create a new user</a>    
     </ul>
+    </div>
     {% endif %}
 {% endblock %}
 {% block javascripts %}
