@@ -1,11 +1,13 @@
 <ul class="sidebar-menu" data-widget="tree">
   <li class="header">MENU</li>
   <!-- Optionally, you can add icons to the links -->
-  <li class="active"><a href="#"><i class="fa fa-link"></i> <span>User</span></a></li>
-  <li ><a href="#"><i class="fa fa-link"></i> <span>Sản Phẩm</span></a></li>
-  <li><a href="#"><i class="fa fa-link"></i> <span>Hóa Đơn</span></a></li>
+  {% if is_granted('ROLE_ADMIN') %}
+    <li class="active"><a href="{{ path('user_index') }}"><i class="glyphicon glyphicon-user"></i> <span>User</span></a></li>
+  {% endif %}
+  <li ><a href="#"><i class="glyphicon glyphicon-apple"></i> <span>Sản Phẩm</span></a></li>
+  <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> <span>Hóa Đơn</span></a></li>
   <li class="treeview">
-    <a href="#"><i class="fa fa-link"></i> <span>Doanh Thu</span>
+    <a href="#"><i class="glyphicon glyphicon-signal"></i> <span>Doanh Thu</span>
       <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
