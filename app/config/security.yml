@@ -25,7 +25,7 @@ security:
                 password_parameter: _password
             logout:
                 path: /logout
-                target: /
+                target: /login
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
