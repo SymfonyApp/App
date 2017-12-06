@@ -27,7 +27,12 @@ class ChiTietHD
      * @ORM\Column(name="SL", type="integer")
      */
     private $sl;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="TenSP", type="string")
+     */
+    private $tensp;
     /**
      * @var int
      *

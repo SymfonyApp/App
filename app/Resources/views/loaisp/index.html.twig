@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Loaisps list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tenloai</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for loaiSP in loaiSPs %}
+            <tr>
+                <td><a href="{{ path('loaisp_show', { 'id': loaiSP.id }) }}">{{ loaiSP.id }}</a></td>
+                <td>{{ loaiSP.tenloai }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('loaisp_show', { 'id': loaiSP.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

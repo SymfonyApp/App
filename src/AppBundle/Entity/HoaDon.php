@@ -31,10 +31,15 @@ class HoaDon
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="NgayXuat", type="datetime")
+     * @ORM\Column(name="NgayGiao", type="datetime")
      */
-    private $ngayxuat;
-
+    private $ngaygiao;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="TrangThai", type="string")
+     */
+    private $trangthai;
     /**
      * @var int
      *

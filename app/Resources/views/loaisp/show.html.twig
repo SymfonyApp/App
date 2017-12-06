@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Loaisp</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ loaiSP.id }}</td>
+            </tr>
+            <tr>
+                <th>Tenloai</th>
+                <td>{{ loaiSP.tenloai }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('loaisp_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

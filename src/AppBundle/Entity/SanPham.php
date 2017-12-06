@@ -32,68 +32,6 @@ class SanPham
      * @ORM\Column(name="TenSP", type="string", length=255)
      */
     private $tensp;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="HDH", type="string", length=255)
-     */
-    private $hdh;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="CameraTruoc", type="integer")
-     */
-    private $cameratruoc;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="CameraSau", type="integer")
-     */
-    private $camerasau;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Ram", type="integer")
-     */
-    private $ram;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Memory", type="integer")
-     */
-    private $memory;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Pin", type="integer")
-     */
-    private $pin;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="CPU", type="string", length=255)
-     */
-    private $cpu;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ManHinh", type="string", length=255)
-     */
-    private $manhinh;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Color", type="string", length=255)
-     */
-    private $color;
     /**
      * @var string
      *

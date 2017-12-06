@@ -38,5 +38,65 @@ class LoaiSP
         $this->sanphams = new ArrayCollection();
     }
   
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTenloai()
+    {
+        return $this->tenloai;
+    }
+
+    /**
+     * @param string $tenloai
+     *
+     * @return self
+     */
+    public function setTenloai($tenloai)
+    {
+        $this->tenloai = $tenloai;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSanphams()
+    {
+        return $this->sanphams;
+    }
+
+    /**
+     * @param mixed $sanphams
+     *
+     * @return self
+     */
+    public function setSanphams($sanphams)
+    {
+        $this->sanphams = $sanphams;
+
+        return $this;
+    }
 }
 
