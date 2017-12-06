@@ -26,8 +26,7 @@ class UserController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $user = $em->getRepository('AppBundle:User')->findAll();
+        $user = $em->getRepository('AppBundle:User')->findAll();       
         /**
          * 
          * @var $paginator \Knp\Component\Pager\Paginator
@@ -40,6 +39,7 @@ class UserController extends Controller
         );
         return $this->render('user/index.html.twig', array(
             'users' => $users,
+
         ));
     }
 
@@ -154,5 +154,34 @@ class UserController extends Controller
             ->getForm()
         ;
     }
+    /**
+     * Lists search user entities.
+     *
+     * @Route("/search", name="user_search")
+     * @Method({"GET", "POST"})
+     */
+    public function searchAction(Request $request)
+    {
 
+        $em = $this->getDoctrine()->getManager();
+         $user = $em->getRepository('AppBundle:User')->findUserByString($request->request->get('_search'));    
+        /**
+         * 
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator  = $this->get('knp_paginator');
+        $users = $paginator->paginate(
+            $user,
+
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',10)
+        );
+        return $this->render('user/tableuser.html.twig', array(
+            'users' => $users,
+        ));
+        // $response = new Response(json_encode($user));
+        // $response->headers->set('Content-Type', 'application/json');
+
+        // return $response;                  
+    }
 }

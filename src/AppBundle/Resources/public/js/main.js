@@ -3,6 +3,7 @@
         $('.deleteUser').click(function (e) {
             //var getUrl = Routing.generate('delete_user', {'id': $(this).attr('id')});
             //e.preventDefault();
+            alert('123');
             var id = $(this).attr("data-playgroup-id");
             if(confirm("Are you sure you want to delete this Record?")){
                 $.ajax({

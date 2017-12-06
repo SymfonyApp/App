@@ -1,0 +1,32 @@
+<table class="table table-hover" id="tb" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="a">
+        {% for user in users %}
+            <tr id="item-"{{user.id}}>
+                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('user_show', { 'id': user.id }) }}">show</a>
+                        
+                    <a class="btn btn-warning" href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                    <a class="deleteUser btn btn-danger" data-playgroup-id ="{{ user.id }}" >Delete</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {# display navigation #}
+    <div class="navigation text-center">
+        {{ knp_pagination_render(users) }}
+    </div>
