@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sanpham</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sanPham.id }}</td>
+            </tr>
+            <tr>
+                <th>Tensp</th>
+                <td>{{ sanPham.tensp }}</td>
+            </tr>
+            <tr>
+                <th>Mota</th>
+                <td>{{ sanPham.mota }}</td>
+            </tr>
+            <tr>
+                <th>Gia</th>
+                <td>{{ sanPham.gia }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sanpham_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

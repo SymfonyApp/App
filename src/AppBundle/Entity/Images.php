@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Images
@@ -28,10 +29,62 @@ class Images
      */
     private $tenhinh;
     /**
-     * Many Image have One SanPham.
      * @ORM\ManyToOne(targetEntity="SanPham", inversedBy="images")
-     * @ORM\JoinColumn(name="id_SP", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $id_sp;
+    private $sanpham;
+
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTenhinh()
+    {
+        return $this->tenhinh;
+    }
+
+    /**
+     * @param string $tenhinh
+     *
+     * @return self
+     */
+    public function setTenhinh($tenhinh)
+    {
+        $this->tenhinh = $tenhinh;
+
+        return $this;
+    }
+
+    public function getSanpham(): SanPham
+    {
+        return $this->sanpham;
+    }
+
+    public function setSanpham(SanPham $sanpham)
+    {
+        $this->sanpham = $sanpham;
+
+        return $this;
+    }
 }
 

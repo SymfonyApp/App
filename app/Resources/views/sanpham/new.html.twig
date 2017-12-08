@@ -1,0 +1,44 @@
+{% extends 'admin/admin.html.twig' %}
+{% block menu %}
+	{% include 'admin/menu.html.twig' %}
+{% endblock %}
+{% block body %}
+<div class="col-md-6">
+  <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Create User</h3>
+            </div>
+            <div class ="content">
+              <form action="{{ path('sanpham_new') }}" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <select class="form-control" id="_loaisp" name="_loaisp">
+                    {% for item in _select %}
+                         <option value="{{item.id}}">{{item.tenloai}}</option>
+                    {% endfor %}                     
+                  </select>
+                </div>
+                 <div class="form-group">
+                  <label>Tên sản phẩm:</label>
+                  <input type="text" class="form-control" id="_tensp" name="_tensp" placeholder="Enter name product">
+                </div>
+                <div class="form-group">
+                  <label >Giá Sản Phẩm:</label>
+                  <input type="number" min="0" class="form-control" id="_gia" name="_gia" placeholder="Enter price product">
+                </div>
+                <div class="form-group">
+                  <label>Image</label>
+                  <input type="file" id="_file" name="_upload[]" multiple="multiple"  accept="image/*" >
+                </div>
+                <div class="form-group">
+                  <label >Mô tả:</label>
+                  <input type="text" class="form-control" id="_mota" name="_mota" placeholder="Enter infomation product">
+                </div>           
+            </div>
+              <div class="box-footer">
+                  <input class="btn btn-success" type="submit" value="Create" />
+                  <a class="btn btn-primary" href="#">Back to the list</a>
+              </div>
+           </form>
+    </div>
+</div>
+{% endblock %}

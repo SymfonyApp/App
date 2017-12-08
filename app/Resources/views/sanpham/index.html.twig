@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sanphams list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tensp</th>
+                <th>Mota</th>
+                <th>Gia</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sanPham in sanPhams %}
+            <tr>
+                <td><a href="{{ path('sanpham_show', { 'id': sanPham.id }) }}">{{ sanPham.id }}</a></td>
+                <td>{{ sanPham.tensp }}</td>
+                <td>{{ sanPham.mota }}</td>
+                <td>{{ sanPham.gia }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('sanpham_show', { 'id': sanPham.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

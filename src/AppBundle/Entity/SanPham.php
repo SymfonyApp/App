@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * SanPham
@@ -21,11 +23,11 @@ class SanPham
      */
     private $id;
     /**
-     * @ORM\ManyToOne(targetEntity="LoaiSp", inversedBy="sanphams")
-     * @ORM\JoinColumn(name="id_LoaiSP", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="LoaiSP", inversedBy="sanphams")
+     * @ORM\JoinColumn(nullable=true)
      */
+    private $loaisp;
 
-    private $id_loaisp;
     /**
      * @var string
      *
@@ -45,13 +47,129 @@ class SanPham
      */
     private $gia;
     /**
-     * One SanPham has Many Image.
-     * @ORM\OneToMany(targetEntity="Images", mappedBy="id_sp")
+     * @ORM\OneToMany(targetEntity="Images", mappedBy="sanpham")
      */
-    private $images;
+    public $images;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->images = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImages()
+    {
+        return $this->image;
+    }
+    public function getLoaiSP(): LoaiSP
+    {
+        return $this->loaisp;
+    }
+
+    public function setLoaiSP(LoaiSP $loaisp)
+    {
+        $this->loaisp = $loaisp;
+    }
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdLoaisp()
+    {
+        return $this->id_loaisp;
+    }
+
+    /**
+     * @param int $id_loaisp
+     *
+     * @return self
+     */
+    public function setIdLoaisp($id_loaisp)
+    {
+        $this->id_loaisp = $id_loaisp;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTensp()
+    {
+        return $this->tensp;
+    }
+
+    /**
+     * @param string $tensp
+     *
+     * @return self
+     */
+    public function setTensp($tensp)
+    {
+        $this->tensp = $tensp;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMota()
+    {
+        return $this->mota;
+    }
+
+    /**
+     * @param string $mota
+     *
+     * @return self
+     */
+    public function setMota($mota)
+    {
+        $this->mota = $mota;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGia()
+    {
+        return $this->gia;
+    }
+
+    /**
+     * @param int $gia
+     *
+     * @return self
+     */
+    public function setGia($gia)
+    {
+        $this->gia = $gia;
+
+        return $this;
     }
 
 }

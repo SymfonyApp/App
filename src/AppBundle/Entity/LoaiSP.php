@@ -3,7 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 /**
  * LoaiSP
  *
@@ -27,18 +28,24 @@ class LoaiSP
      * @ORM\Column(name="Tenloai", type="string", length=255)
      */
     private $tenloai;
-
+  
     /**
-     * @ORM\OneToMany(targetEntity="SanPham", mappedBy="id_loaisp")
+     * @ORM\OneToMany(targetEntity="SanPham", mappedBy="loaisp")
      */
-    private $sanphams;
+    public $sanphams;
 
     public function __construct()
     {
         $this->sanphams = new ArrayCollection();
     }
-  
 
+    /**
+     * @return Collection|SanPham[]
+     */
+    public function getSanphams()
+    {
+        return $this->sanphams;
+    }
     /**
      * @return int
      */
@@ -79,24 +86,5 @@ class LoaiSP
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSanphams()
-    {
-        return $this->sanphams;
-    }
-
-    /**
-     * @param mixed $sanphams
-     *
-     * @return self
-     */
-    public function setSanphams($sanphams)
-    {
-        $this->sanphams = $sanphams;
-
-        return $this;
-    }
 }
 
