@@ -9,7 +9,7 @@
               <h3 class="box-title">Create User</h3>
             </div>
             <div class ="content">
-              <form action="{{ path('sanpham_new') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ path('product_new') }}" method="POST" enctype="multipart/form-data">
                 {% include 'sanpham/errors.html.twig' %}
                 <div class="form-group">
                   <select class="form-control" id="_loaisp" name="_loaisp">
@@ -37,7 +37,7 @@
             </div>
               <div class="box-footer">
                   <input class="btn btn-success" type="submit" value="Create" />
-                  <a class="btn btn-primary" href="#">Back to the list</a>
+                  <a class="btn btn-primary" href="{{path('product_index')}}">Back to the list</a>
               </div>
            </form>
     </div>

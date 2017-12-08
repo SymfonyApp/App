@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+
 /**
  * SanPhamRepository
  *
@@ -10,4 +11,11 @@ namespace AppBundle\Repository;
  */
 class SanPhamRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findProductByString($str){
+		return $this->createQueryBuilder('p')
+			->where('p.tensp LIKE :str') 
+			->setParameter('str','%'.$str.'%')
+			->getQuery();
+
+	}
 }

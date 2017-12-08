@@ -1,36 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.html.twig' %}
+{% block menu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
 
 {% block body %}
-    <h1>Sanphams list</h1>
+    <!-- /.row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h1 class="box-title">Table Product</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Tensp</th>
-                <th>Mota</th>
-                <th>Gia</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for sanPham in sanPhams %}
-            <tr>
-                <td><a href="{{ path('sanpham_show', { 'id': sanPham.id }) }}">{{ sanPham.id }}</a></td>
-                <td>{{ sanPham.tensp }}</td>
-                <td>{{ sanPham.mota }}</td>
-                <td>{{ sanPham.gia }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('sanpham_show', { 'id': sanPham.id }) }}">show</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+              <div class="box-tools">
+                <form method="POST" action="{{path('product_index')}}">
+                    <div class="input-group input-group-sm" style="width: 200px;">
+                        <input type="text" id="_search" name="_search" class="form-control pull-right" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button type="submit" id="btn_search" class="btn btn-default "><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+                
+              </div>
+            </div>
+            <!-- /.box-header -->
+    <div class="box-body table-responsive no-padding" id="table_id" >
+      <div class="table_id">
+        {% include 'sanpham/table.html.twig' %}
+      </div>
 
-    
+    </div>
+    </div>
+    <div class="row"  >
+    <ul>
+            <a class="btn btn-success" href="{{ path('product_new') }}">Create a new product</a>    
+    </ul>
+    </div>
+{% endblock %}
+{% block javascripts %}
 {% endblock %}

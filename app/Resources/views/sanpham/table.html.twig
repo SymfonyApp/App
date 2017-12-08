@@ -1,0 +1,34 @@
+<table class="table table-hover" id="tb" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th class="table-image">Image</th>
+                <th>Tên SP</th>
+                <th>Loại SP</th>
+                <th>Giá</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="a">
+        {% for sanpham in sanphams %}
+            <tr id="item-"{{sanpham.id}}>
+                <td><a href="#">{{ sanpham.id }}</a></td>
+                <td class="table-image"><img src="{{ asset('bundles/app/images/'~sanpham.images[0].tenhinh)}}" width="70" height="70"></td>
+                <td>{{ sanpham.tensp }}</td>
+                <td>{{ sanpham.loaisp.tenloai }}</td>
+                <td>{{ sanpham.gia }}</td>
+                <td>
+                    <a class="btn btn-primary" href="#">show</a>
+                    <a class="btn btn-warning" href="#">edit</a>
+                    <a class="deleteProduct btn btn-danger" data-playgroup-id ="{{ sanpham.id }}" >Delete</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {# display navigation #}
+    <div class="navigation text-center">
+        {{ knp_pagination_render(sanphams) }}
+    </div>
+
