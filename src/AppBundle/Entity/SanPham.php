@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SanPham
@@ -32,18 +33,27 @@ class SanPham
      * @var string
      *
      * @ORM\Column(name="TenSP", type="string", length=255)
+     * @Assert\NotBlank(message="không được để trống mục tên sản phẩm!")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 100,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $tensp;
     /**
      * @var string
      *
      * @ORM\Column(name="MoTaCT", type="text")
+     * @Assert\NotBlank(message="không được để trống phần mô tả sản phẩm!")
      */
     private $mota;
     /**
      * @var int
      *
      * @ORM\Column(name="Gia", type="integer")
+     * @Assert\NotNull(message="không được để trống!")
      */
     private $gia;
     /**

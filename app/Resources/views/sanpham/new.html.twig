@@ -10,6 +10,7 @@
             </div>
             <div class ="content">
               <form action="{{ path('sanpham_new') }}" method="POST" enctype="multipart/form-data">
+                {% include 'sanpham/errors.html.twig' %}
                 <div class="form-group">
                   <select class="form-control" id="_loaisp" name="_loaisp">
                     {% for item in _select %}

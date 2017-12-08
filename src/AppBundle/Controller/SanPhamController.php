@@ -31,16 +31,25 @@ class SanPhamController extends Controller
         $sanpham = new SanPham();
         $loai= new LoaiSP();
         $_select= new LoaiSP();
-        
+        $errors=null;
          $em = $this->getDoctrine()->getManager();
         $_select= $em->getRepository('AppBundle:LoaiSP')->findAll();
         if ($request->getMethod()=="POST")
          {
-            
+              
              $sanpham->setTensp($request->request->get('_tensp'));
              $sanpham->setGia($request->request->getInt('_gia'));
              $sanpham->setMota($request->request->get('_mota'));
              //loaisp
+               $validator = $this->get('validator');
+                $errors = $validator->validate($sanpham);
+
+              if (count($errors) > 0)
+              {
+                //  print_r($errors);
+                  return $this->render('sanpham/new.html.twig', array('_select'=>$_select,
+                        'errors'=>$errors,));
+              }
              $loai = $this->getDoctrine()
              ->getRepository(LoaiSP::class)
              ->findOneById($request->request->getInt('_loaisp'));
@@ -49,12 +58,12 @@ class SanPhamController extends Controller
              $em->flush();
             //image
             /** @var UploadedFile|null $file */
-            $list = $request->files->get('_upload');
+            $listfile = $request->files->get('_upload');
             
-            foreach ($list as $img) {
+            foreach ($listfile as $img) {
               $filename=md5(uniqid()).'.'.$img->guessExtension();
               $img->move($this->container->getParameter('images_directory'),$filename);
-               print_r($filename);
+               //print_r($filename);
               $image= new Images();
               $image->setTenhinh($filename);    
               $image->setSanpham($sanpham);
@@ -62,12 +71,12 @@ class SanPhamController extends Controller
               $em->flush();
             }
 
-             return $this->render('sanpham/new.html.twig',array('_select' =>$_select, ));
+             return $this->render('sanpham/new.html.twig',array('_select' =>$_select,
+                'errors'=>null));
          }
         return $this->render('sanpham/new.html.twig', array(
             '_select'=>$_select,
+            'errors'=>$errors,
         ));
-
-      //  return $this->render('sanpham/new.html.twig');
     }
 }
