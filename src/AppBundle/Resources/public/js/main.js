@@ -22,7 +22,6 @@
         $(document).on('click','#btn_search',function(e){
 
             var q = $("input[name='_search']").val();
-             alert(q);
             $.ajax({
                     type: 'POST',
                     url:  '../user/search',
@@ -39,6 +38,26 @@
                 });
             
         })
-                       
+        $(document).on('click','.deleteImg',function(e){
+            var id = $(this).attr("data-playgroup-id");
+            var idsp = $("input[name='idsp']").val();
+            
+             if(confirm("Are you sure you want to delete this Record?")){
+                $.ajax({
+                    alert(id);
+                    type: 'POST',
+                    url:  '../img/delete',
+                    datatype: 'json',
+                    data: {"_id": id,
+                           "idsp": idsp},
+                    success: function (response) {
+                       // location.reload();
+                       $("#table_image").html(response);
+                        console.log("borrado");
+                    },
+                });
+            }
+            
+        })               
 
  });
