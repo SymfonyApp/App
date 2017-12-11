@@ -103,26 +103,6 @@ class SanPham
     }
 
     /**
-     * @return mixed
-     */
-    public function getIdLoaisp()
-    {
-        return $this->id_loaisp;
-    }
-
-    /**
-     * @param int $id_loaisp
-     *
-     * @return self
-     */
-    public function setIdLoaisp($id_loaisp)
-    {
-        $this->id_loaisp = $id_loaisp;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getTensp()

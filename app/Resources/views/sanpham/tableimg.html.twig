@@ -1,0 +1,12 @@
+<table class="" style="width:300px">
+                      <tr>
+                        <th>Image</th>
+                        <th>Action</th> 
+                      </tr>
+                      {% for img in sanpham.images %}
+                      <tr>          
+                        <td class="table-image" style="width:100px"><img src="{{ asset('bundles/app/images/'~img.tenhinh)}}" width="70" height="70"></td>
+                        <td><a class="deleteImg btn btn-danger" data-playgroup-id ="{{ img.id }}" >Delete</a></td> 
+                      </tr>
+                      {% endfor %}
+                  </table>
