@@ -134,72 +134,11 @@ class SanPhamController extends Controller
     $em = $this->getDoctrine()->getManager();
     $_select= $em->getRepository('AppBundle:LoaiSP')->findAll();
     $errors=null;
-    if($request->getMethod()=='POST')
-    {
-      $sanpham->setTensp($request->request->get('_tensp'));
-      $sanpham->setGia($request->request->getInt('_gia'));
-      $sanpham->setMota($request->request->get('_mota'));
-      //validation
-         $validator = $this->get('validator');
-         $errors = $validator->validate($sanpham);
-          if (count($errors) > 0)
-          {
-            //  print_r($errors);
-              return $this->render('sanpham/edit.html.twig', array('sanpham'=>$sanpham,
-                      '_select'=>$_select,
-                      'errors'=>$errors));
-          }
-          else
-          {
-            $loai= new LoaiSP();
-            $loai = $this->getDoctrine()
-             ->getRepository(LoaiSP::class)
-             ->findOneById($request->request->getInt('_loaisp'));
-             $sanpham->setLoaiSP($loai);  
-             $em->flush();
-             //image
-              /** @var UploadedFile|null $file */
-             $listfile = $request->files->get('_upload');
-             if(count($listfile) != 0)
-             {
-                foreach ($listfile as $img) {
-                $filename=md5(uniqid()).'.'.$img->guessExtension();
-                $img->move($this->container->getParameter('images_directory'),$filename);
-                 //print_r($filename);
-                $image= new Images();
-                $image->setTenhinh($filename);    
-                $image->setSanpham($sanpham);
-                $em->persist($image);
-                $em->flush();
-              }
-             }
-              
-          }
-    }
-        return $this->render('sanpham/edit.html.twig', array(
+    return $this->render('sanpham/edit.html.twig', array(
         'sanpham'=>$sanpham,
         '_select'=>$_select,
         'errors'=>$errors
     ));
-  }
-
-   /**
-   *
-   * @Route("/delete/img", name="image_delete")
-   * @Method({"GET", "POST"})
-   */
-  public function deleteimageAction(Request $request)
-  {
-
-        $em = $this->getDoctrine()->getManager();
-         $img = $em->getRepository('AppBundle:Images')->findOneById($request->request->get('_id'));    
-        $em->remove($img);
-        $em->flush();
-        $sanpham= $em->getRepository('AppBundle:SanPham')->findOneById($request->request->get('idsp'));
-        //return new Response();
-        return $this->render('sanpham/tableimg.html.twig', array(
-             'sanpham' => $sanpham,
-         ));
   }
   
 }
