@@ -3,7 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * KhachHang
  *
@@ -55,6 +57,23 @@ class KhachHang
      * @ORM\Column(name="ThanhVien", type="boolean")
      */
     private $thanhvien;
+    /**
+     * @ORM\OneToMany(targetEntity="HoaDon", mappedBy="khachhang")
+     */
+    public $hoadons;
+
+    public function __construct()
+    {
+        $this->hoadons = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|HoaDon[]
+     */
+    public function gethds()
+    {
+        return $this->hoadons;
+    }
 
 }
 

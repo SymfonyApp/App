@@ -3,7 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * HoaDon
  *
@@ -46,22 +48,36 @@ class HoaDon
      * @ORM\Column(name="TongTien", type="integer")
      */
     private $tongtien;
-        /**
-     * One Product has One Shipment.
-     * @ORM\OneToOne(targetEntity="KhachHang")
-     * @ORM\JoinColumn(name="id_kh", referencedColumnName="id")
+    /**
+     * @ORM\OneToMany(targetEntity="ChiTietHD", mappedBy="hoadon")
      */
-    private $id_kh;
+    public $cthds;
+
+    public function __construct()
+    {
+        $this->cthds = new ArrayCollection();
+    }
 
     /**
-     * One Product has Many Features.
-     * @ORM\OneToMany(targetEntity="ChiTietHD", mappedBy="id_hd")
+     * @return Collection|ChiTietHD[]
      */
-    private $cthds;
-    // ...
+    public function getcthds()
+    {
+        return $this->cthds;
+    }
+    /**
+     * @ORM\ManyToOne(targetEntity="KhachHang", inversedBy="hoadons")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $khachhang;
+    public function getHD(): KhachHang
+    {
+        return $this->khachhang;
+    }
 
-    public function __construct() {
-        $this->cthds = new ArrayCollection();
+    public function setHD(KhachHang $khachhang)
+    {
+        $this->khachhang = $khachhang;
     }
 
 }

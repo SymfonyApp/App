@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ChiTietHD
@@ -47,16 +50,29 @@ class ChiTietHD
      */
     private $thanhtien;
 
-    /**
-     * Many CTHD has One HD.
-     * @ORM\ManyToOne(targetEntity="HoaDon", inversedBy="cthds")
-     * @ORM\JoinColumn(name="id_hd", referencedColumnName="id")
-     */
-    private $id_hd;
         /**
      * @ORM\OneToOne(targetEntity="SanPham")
-     * @ORM\JoinColumn(name="id_sp", referencedColumnName="id")
+     * @ORM\JoinColumn(name="sanpham_id", referencedColumnName="id", nullable=true )
      */
-    private $id_sp;
+    private $sanpham_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="HoaDon", inversedBy="cthds")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $hoadon;
+    public function getHD(): HoaDon
+    {
+        return $this->hoadon;
+    }
+
+    public function setHD(HoaDon $hoadon)
+    {
+        $this->hoadon = $hoadon;
+    }
+    public function getSP(): SanPham
+    {
+        return $this->sanpham_id;
+    }
 }
 
