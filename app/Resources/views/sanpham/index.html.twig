@@ -12,7 +12,7 @@
               <h1 class="box-title">Table Product</h1>
 
               <div class="box-tools">
-                <form method="POST" action="{{path('product_index')}}">
+                <form method="GET" action="{{path('product_index')}}">
                     <div class="input-group input-group-sm" style="width: 200px;">
                         <input type="text" id="_search" name="_search" class="form-control pull-right" placeholder="Search">
                         <div class="input-group-btn">
@@ -38,4 +38,6 @@
     </div>
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/main.js' )}}"></script>
 {% endblock %}

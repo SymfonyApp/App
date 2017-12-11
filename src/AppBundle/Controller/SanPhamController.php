@@ -11,6 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -82,12 +84,19 @@ class SanPhamController extends Controller
   /** 
    * List product entity
    * @Route("/", name="product_index")
-   * @Method({"GET","POST"})
+   * 
    */
   public function indexAction(Request $request)
   {
     $em= $this->getDoctrine()->getManager();
-    $sanpham= $em->getRepository('AppBundle:SanPham')->findAll();
+    if($request->query->getAlnum('_search'))
+    {
+      $sanpham=$em->getRepository('AppBundle:SanPham')->findProductByString($request->query->getAlnum('_search'));
+    }
+    else
+    {
+      $sanpham= $em->getRepository('AppBundle:SanPham')->findAll();
+    }
     /**
      * 
      * @var $paginator \Knp\Component\Pager\Paginator
@@ -101,5 +110,5 @@ class SanPhamController extends Controller
     return $this->render('sanpham/index.html.twig', array(
           'sanphams'=>$sanphams));
   }
-
+  
 }
