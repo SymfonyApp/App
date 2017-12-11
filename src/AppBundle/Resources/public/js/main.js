@@ -1,9 +1,7 @@
  $(document).ready(function () {
 
-        $('.deleteUser').click(function (e) {
-            //var getUrl = Routing.generate('delete_user', {'id': $(this).attr('id')});
-            //e.preventDefault();
-            alert('123');
+      //  $('.deleteUser').click(function (e) {
+        $(document).on('click','.deleteUser',function(e){
             var id = $(this).attr("data-playgroup-id");
             if(confirm("Are you sure you want to delete this Record?")){
                 $.ajax({
@@ -20,5 +18,27 @@
                 });
             }
             
-        });
+        })
+        $(document).on('click','#btn_search',function(e){
+
+            var q = $("input[name='_search']").val();
+             alert(q);
+            $.ajax({
+                    type: 'POST',
+                    url:  '../user/search',
+                    datatype: 'json',
+                    data: {"_search": q},
+                    success: function (response) {
+                       // location.reload();
+                       $("#table_id").html(response);
+                        console.log("borrado");
+                    },
+                    error: function (response) {
+                        console.log("no borrado");
+                    }
+                });
+            
+        })
+                       
+
  });

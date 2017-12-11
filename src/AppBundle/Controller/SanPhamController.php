@@ -110,5 +110,35 @@ class SanPhamController extends Controller
     return $this->render('sanpham/index.html.twig', array(
           'sanphams'=>$sanphams));
   }
+ /**
+   * Finds and displays a SanPham entity.
+   *
+   * @Route("/{id}", name="product_show")
+   * @Method("GET")
+   */
+  public function showAction(SanPham $sanpham)
+  {
+      return $this->render('sanpham/show.html.twig', array(
+          'sanpham' => $sanpham,
+      ));
+  }
+ /**
+   * Displays a form to edit an existing SanPham entity.
+   *
+   * @Route("/{id}/edit", name="product_edit")
+   * @Method({"GET", "POST"})
+   */
+  public function editAction(Request $request, SanPham $sanpham)
+  {
+    $_select= new LoaiSP();
+    $em = $this->getDoctrine()->getManager();
+    $_select= $em->getRepository('AppBundle:LoaiSP')->findAll();
+    $errors=null;
+    return $this->render('sanpham/edit.html.twig', array(
+        'sanpham'=>$sanpham,
+        '_select'=>$_select,
+        'errors'=>$errors
+    ));
+  }
   
 }

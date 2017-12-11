@@ -18,8 +18,8 @@
                 <td>{{ sanpham.loaisp.tenloai }}</td>
                 <td>{{ sanpham.gia }}</td>
                 <td>
-                    <a class="btn btn-primary" href="#">show</a>
-                    <a class="btn btn-warning" href="#">edit</a>
+                    <a class="btn btn-primary" href="{{ path('product_show', { 'id': sanpham.id }) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('product_edit', { 'id': sanpham.id }) }}">edit</a>
                     <a class="deleteProduct btn btn-danger" data-playgroup-id ="{{ sanpham.id }}" >Delete</a>
                     
                 </td>
