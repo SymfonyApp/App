@@ -13,7 +13,13 @@
         {% for sanpham in sanphams %}
             <tr id="item-"{{sanpham.id}}>
                 <td><a href="#">{{ sanpham.id }}</a></td>
-                <td class="table-image"><img src="{{ asset('bundles/app/images/'~sanpham.images[0].tenhinh)}}" width="70" height="70"></td>
+                <td class="table-image">
+                    {% if sanpham.images|length !=0 %}
+                        <img src="{{ asset('bundles/app/images/'~sanpham.images[0].tenhinh)}}" width="70" height="70">
+                    {% else %}
+                        <img src="{{ asset('bundles/app/images/No_Image.jpg')}}" width="70" height="70">
+                    {% endif %}
+                </td>
                 <td>{{ sanpham.tensp }}</td>
                 <td>{{ sanpham.loaisp.tenloai }}</td>
                 <td>{{ sanpham.gia }}</td>

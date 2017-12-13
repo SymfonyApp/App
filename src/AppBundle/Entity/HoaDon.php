@@ -79,5 +79,106 @@ class HoaDon
     {
         $this->khachhang = $khachhang;
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getNgaydat()
+    {
+        return $this->ngaydat;
+    }
+
+    /**
+     * @param \DateTime $ngaydat
+     *
+     * @return self
+     */
+    public function setNgaydat(\DateTime $ngaydat)
+    {
+        $this->ngaydat = $ngaydat;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getNgaygiao()
+    {
+        return $this->ngaygiao;
+    }
+
+    /**
+     * @param \DateTime $ngaygiao
+     *
+     * @return self
+     */
+    public function setNgaygiao(\DateTime $ngaygiao)
+    {
+        $this->ngaygiao = $ngaygiao;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrangthai()
+    {
+        return $this->trangthai;
+    }
+
+    /**
+     * @param string $trangthai
+     *
+     * @return self
+     */
+    public function setTrangthai($trangthai)
+    {
+        $this->trangthai = $trangthai;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTongtien()
+    {
+        return $this->tongtien;
+    }
+
+    /**
+     * @param int $tongtien
+     *
+     * @return self
+     */
+    public function setTongtien($tongtien)
+    {
+        $this->tongtien = $tongtien;
+
+        return $this;
+    }
+
 }
 

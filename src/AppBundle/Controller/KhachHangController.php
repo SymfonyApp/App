@@ -114,6 +114,7 @@ class KhachHangController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         foreach ($id->gethds() as $hdkh) {
+            //customer_id set null
             $id->removeHD($hdkh);
         }
         $em->remove($id);

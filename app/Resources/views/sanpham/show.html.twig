@@ -49,7 +49,7 @@
                 <ul>
                         <a href="{{ path('product_index') }}" class="btn btn-primary" >Back to the list</a>
                         <a href="{{ path('product_edit', { 'id': sanpham.id }) }}" class="btn btn-warning">Edit</a>
-                        <a class="deleteUser btn btn-danger" href="#" >Delete</a>
+                        <a class="deleteProduct btn btn-danger" href="{{ path('product_delete', { 'id': sanpham.id }) }}" >Delete</a>
                  </ul>
       </div>
 

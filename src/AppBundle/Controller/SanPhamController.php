@@ -71,8 +71,7 @@ class SanPhamController extends Controller
                 $em->persist($image);
                 $em->flush();
               }
-              return $this->render('sanpham/new.html.twig',array('_select' =>$_select,
-                  'errors'=>null));
+              return $this->redirectToRoute('product_show', array('id' => $sanpham->getId()));
           }
           
        }
@@ -200,6 +199,31 @@ class SanPhamController extends Controller
         return $this->render('sanpham/tableimg.html.twig', array(
              'sanpham' => $sanpham,
          ));
+  }
+  /**
+   * Deletes a SanPham entity.
+   *
+   * @Route("/delete/{id}", name="product_delete", options={"expose"=true})
+   * @Method({"DELETE","GET"})
+   * @param SanPham $id
+   * @return Response
+   */
+  public function deleteAction(SanPham $id, Request $request)
+  {
+      $em = $this->getDoctrine()->getManager();
+
+      foreach ($id->images as $img ) {
+        //remove image
+        $em->remove($img);
+        $em->flush();
+      }
+      $em->remove($id);
+      $em->flush();
+      if($request->getMethod()=="GET")
+      {
+          return $this->redirect($this->generateUrl("product_index"));
+      }
+      return new Response();   
   }
   
 }
