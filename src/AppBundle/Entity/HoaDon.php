@@ -70,15 +70,14 @@ class HoaDon
      * @ORM\JoinColumn(nullable=true)
      */
     private $khachhang;
-    public function getHD(): KhachHang
+    public function getKH(): KhachHang
     {
         return $this->khachhang;
     }
 
-    public function setHD(KhachHang $khachhang)
+    public function setKH(KhachHang $khachhang = null)
     {
         $this->khachhang = $khachhang;
     }
-
 }
 

@@ -1,0 +1,36 @@
+<table class="table table-hover" id="tb" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tên KH</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>SĐT</th>
+                <th>Thành viên</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="a">
+        {% for khachhang in khachhangs %}
+            <tr id="item-"{{khachhang.id}}>
+                <td><a href="{{ path('customer_show', { 'id': khachhang.id }) }}">{{ khachhang.id }}</a></td>
+                <td>{{ khachhang.tenkh }}</td>
+                <td>{{ khachhang.email }}</td>
+                <td>{{ khachhang.diachi }}</td>
+                <td>{{ khachhang.sdt }}</td>
+                <td>{% if khachhang.thanhvien %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('customer_show', { 'id': khachhang.id }) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('customer_edit', { 'id': khachhang.id }) }}">edit</a>
+                    <a class="deleteCustomer btn btn-danger" data-playgroup-id ="{{ khachhang.id }}" >Delete</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {# display navigation #}
+    <div class="navigation text-center">
+        {{ knp_pagination_render(khachhangs) }}
+    </div>
+

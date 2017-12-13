@@ -38,15 +38,14 @@
                 });
             
         })
-        $(document).on('click','.deleteImg',function(e){
+         $(document).on('click','.deleteImg',function(e){
             var id = $(this).attr("data-playgroup-id");
             var idsp = $("input[name='idsp']").val();
             
              if(confirm("Are you sure you want to delete this Record?")){
                 $.ajax({
-                    alert(id);
                     type: 'POST',
-                    url:  '../img/delete',
+                    url:  '../delete/img',
                     datatype: 'json',
                     data: {"_id": id,
                            "idsp": idsp},
@@ -54,10 +53,29 @@
                        // location.reload();
                        $("#table_image").html(response);
                         console.log("borrado");
+                        
                     },
                 });
             }
             
-        })               
+        })
+        $(document).on('click','.deleteCustomer',function(e){
+            var id = $(this).attr("data-playgroup-id");
+            if(confirm("Are you sure you want to delete this Record?")){
+                $.ajax({
+                    type: 'delete',
+                    url:  '../khachhang/delete/'+ id,
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        location.reload();
+                        console.log("borrado");
+                    },
+                    error: function (response) {
+                        console.log("no borrado");
+                    }
+                });
+            }
+            
+        })                
 
  });
