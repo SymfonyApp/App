@@ -1,0 +1,60 @@
+{% extends 'admin/admin.html.twig' %}
+{% block menu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <!-- /.row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h1 class="box-title">Hóa đơn</h1>
+
+            </div>
+            <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding" id="table_id" >
+          <div class="table_id">
+           <table class="table table-hover">
+                
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ hoadon.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Trạng thái</th>
+                        <td>{{ hoadon.trangthai }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tên KH</th>
+                        <td>{% if hoadon.khachhang %}{{ hoadon.khachhang.tenkh }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Ngày đặt</th>
+                        <td>{% if hoadon.ngaydat %}{{ hoadon.ngaydat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Ngày giao</th>
+                        <td>{% if hoadon.ngaygiao %}{{ hoadon.ngaygiao|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Tongtien</th>
+                        <td>{{ hoadon.tongtien }}</td>
+                    </tr>
+                </tbody>
+                </table>
+
+                <ul>
+                        <a href="{{ path('bill_index') }}" class="btn btn-primary" >Back to the list</a>
+                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a class="deleteCustomer btn btn-danger" href="#" >Delete</a>
+                 </ul>
+      </div>
+
+    </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

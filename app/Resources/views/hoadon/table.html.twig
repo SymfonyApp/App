@@ -1,0 +1,36 @@
+<table class="table table-hover" id="tb" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Trạng thái</th>
+                <th>Tên KH</th>
+                <th>Ngày đặt</th>
+                <th>Ngày giao</th>
+                <th>Tổng tiền</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="a">
+        {% for hoadon in hoadons %}
+            <tr id="item-"{{hoadon.id}}>
+                <td><a href="{{ path('bill_show', { 'id': hoadon.id }) }}">{{ hoadon.id }}</a></td>
+                <td>{{ hoadon.trangthai }}</td>
+                <td>{% if hoadon.khachhang %}{{ hoadon.khachhang.tenkh }}{% endif %}</td>
+                <td>{% if hoadon.ngaydat %}{{ hoadon.ngaydat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if hoadon.ngaygiao %}{{ hoadon.ngaygiao|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ hoadon.tongtien }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('bill_show', { 'id': hoadon.id }) }}">show</a>
+                    <a class="btn btn-warning" href="#">edit</a>
+                    <a class="deleteCustomer btn btn-danger" data-playgroup-id ="#" >Delete</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {# display navigation #}
+    <div class="navigation text-center">
+        {{ knp_pagination_render(hoadons) }}
+    </div>
+

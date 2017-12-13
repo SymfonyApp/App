@@ -69,7 +69,7 @@ class HoaDon
      * @ORM\ManyToOne(targetEntity="KhachHang", inversedBy="hoadons")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $khachhang;
+    public $khachhang;
     public function getKH(): KhachHang
     {
         return $this->khachhang;
