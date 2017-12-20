@@ -54,7 +54,7 @@ class ChiTietHD
      * @ORM\OneToOne(targetEntity="SanPham")
      * @ORM\JoinColumn(name="sanpham_id", referencedColumnName="id", nullable=true )
      */
-    private $sanpham_id;
+    public $sanpham_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="HoaDon", inversedBy="cthds")
@@ -73,6 +73,106 @@ class ChiTietHD
     public function getSP(): SanPham
     {
         return $this->sanpham_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSl()
+    {
+        return $this->sl;
+    }
+
+    /**
+     * @param int $sl
+     *
+     * @return self
+     */
+    public function setSl($sl)
+    {
+        $this->sl = $sl;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTensp()
+    {
+        return $this->tensp;
+    }
+
+    /**
+     * @param string $tensp
+     *
+     * @return self
+     */
+    public function setTensp($tensp)
+    {
+        $this->tensp = $tensp;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDongia()
+    {
+        return $this->dongia;
+    }
+
+    /**
+     * @param int $dongia
+     *
+     * @return self
+     */
+    public function setDongia($dongia)
+    {
+        $this->dongia = $dongia;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getThanhtien()
+    {
+        return $this->thanhtien;
+    }
+
+    /**
+     * @param int $thanhtien
+     *
+     * @return self
+     */
+    public function setThanhtien($thanhtien)
+    {
+        $this->thanhtien = $thanhtien;
+
+        return $this;
     }
 }
 

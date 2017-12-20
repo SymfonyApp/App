@@ -19,6 +19,16 @@ use Symfony\Component\HttpFoundation\Response;
 class HoaDonController extends Controller
 {
     /**
+     * 
+     *
+     * @Route("/new", name="bill_new")
+     * 
+     */
+    public function newAction(Request $request)
+    {
+        
+    }
+    /**
      * Lists all hoaDon entities.
      *
      * @Route("/", name="bill_index")
