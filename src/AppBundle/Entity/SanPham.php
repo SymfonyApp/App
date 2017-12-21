@@ -89,6 +89,11 @@ class SanPham
     {
         return $this->loaisp;
     }
+    public function removeCTHD(ChiTietHD $chitiet)
+    {
+        $this->cthds->removeElement($chitiet);
+        $chitiet->setSP(null);
+    }
 
     public function setLoaiSP(LoaiSP $loaisp)
     {

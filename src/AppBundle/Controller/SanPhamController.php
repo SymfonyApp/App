@@ -217,7 +217,11 @@ class SanPhamController extends Controller
         $em->remove($img);
         $em->flush();
       }
+      foreach ($id->getCthds() as $cthd) {
+        $id->removeCTHD($cthd);     
+      }
       $em->remove($id);
+      
       $em->flush();
       if($request->getMethod()=="GET")
       {

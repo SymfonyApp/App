@@ -74,7 +74,7 @@ class ChiTietHD
     {
         return $this->sanpham;
     }
-    public function setSP(SanPham $sanpham)
+    public function setSP(SanPham $sanpham = null)
     {
         $this->sanpham=$sanpham;
     }
