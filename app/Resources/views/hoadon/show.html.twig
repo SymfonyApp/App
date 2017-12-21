@@ -35,8 +35,8 @@
                         <tbody>
                             {% for cthd in hoadon.cthds %}
                                 <td align="center">
-                                    {% if cthd.sanpham_id %}
-                                        {{cthd.sanpham_id.id}}
+                                    {% if cthd.sanpham %}
+                                        {{cthd.sanpham.id}}
                                     {% endif %}
                                 </td>
                                 <td>{{cthd.tensp}}</td>

@@ -57,15 +57,27 @@ class SanPham
      */
     private $gia;
     /**
+     * @ORM\OneToMany(targetEntity="ChiTietHD", mappedBy="sanpham")
+     */
+    public $cthds;
+
+    /**
      * @ORM\OneToMany(targetEntity="Images", mappedBy="sanpham")
      */
     public $images;
 
     public function __construct()
     {
+        $this->cthds = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
-
+    /**
+     * @return Collection|ChiTietHD[]
+     */
+    public function getCthds()
+    {
+        return $this->cthds;
+    }
     /**
      * @return Collection|Images[]
      */

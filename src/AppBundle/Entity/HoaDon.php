@@ -33,7 +33,7 @@ class HoaDon
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="NgayGiao", type="datetime")
+     * @ORM\Column(name="NgayGiao", type="datetime",nullable=true )
      */
     private $ngaygiao;
     /**

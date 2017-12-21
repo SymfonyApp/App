@@ -51,10 +51,10 @@ class ChiTietHD
     private $thanhtien;
 
         /**
-     * @ORM\OneToOne(targetEntity="SanPham")
-     * @ORM\JoinColumn(name="sanpham_id", referencedColumnName="id", nullable=true )
+     * @ORM\ManyToOne(targetEntity="SanPham")
+     * @ORM\JoinColumn(nullable=true )
      */
-    public $sanpham_id;
+    public $sanpham;
 
     /**
      * @ORM\ManyToOne(targetEntity="HoaDon", inversedBy="cthds")
@@ -72,7 +72,11 @@ class ChiTietHD
     }
     public function getSP(): SanPham
     {
-        return $this->sanpham_id;
+        return $this->sanpham;
+    }
+    public function setSP(SanPham $sanpham)
+    {
+        $this->sanpham=$sanpham;
     }
 
     /**
