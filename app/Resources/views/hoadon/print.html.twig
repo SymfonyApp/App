@@ -1,0 +1,38 @@
+<title>Hóa Đơn {{hoadon.khachhang.tenkh}}</title>
+<h1 align="center">HÓA ĐƠN BÁN LẺ</h1>
+<br>
+<br>
+<h4>Tên KH: {{ hoadon.khachhang.tenkh }}</h4>
+<h4>Địa chỉ:  {{ hoadon.khachhang.diachi }}</h4>
+<h4>SĐT:  {{ hoadon.khachhang.sdt }}</h4>
+<h4>Ngày đặt: {% if hoadon.ngaydat %}{{ hoadon.ngaydat|date('Y-m-d H:i:s') }}{% endif %}</h4>
+<br>
+<h3 align="center">DANH SÁCH SẢN PHẨM</h3>
+<br>
+<table align="center" border="1">
+	<thead>
+		<th width="5%">STT</th>
+		<th width="50%">Tên SP</th>
+		<th width="5%">Số lượng</th>
+		<th width="20%">Đơn giá</th>
+		<th width="20%">Thành Tiền</th>
+	</thead>
+	{% set i = 1%}
+	{% for cthd in hoadon.cthds %}
+		<tbody>
+			<td align="center">{{i}}</td>
+			<td>{{cthd.tensp}}</td>
+			<td align="center">{{cthd.sl}}</td>
+			<td align="right">{{cthd.dongia|number_format }} đ</td>
+			<td align="right">{{cthd.thanhtien | number_format}} đ</td>
+		</tbody>
+	    {% set i = i+1 %}
+	{% endfor %}
+	<tbody>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td align="right">TỔNG TIỂN:</td>
+		<td align="right">{{hoadon.tongtien|number_format}} đ</td>
+	</tbody>
+</table>

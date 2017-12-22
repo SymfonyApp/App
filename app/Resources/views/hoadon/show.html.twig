@@ -32,8 +32,9 @@
                             <th>Đơn giá</th>
                             <th>Thành tiền</th>    
                         </thead>
+                        {% for cthd in hoadon.cthds %}
                         <tbody>
-                            {% for cthd in hoadon.cthds %}
+                            
                                 <td align="center">
                                     {% if cthd.sanpham %}
                                         {{cthd.sanpham.id}}
@@ -42,11 +43,9 @@
                                 <td>{{cthd.tensp}}</td>
                                 <td align="center">{{cthd.sl}}</td>
                                 <td align="right">{{cthd.dongia}}</td>
-                                <td align="right">{{cthd.thanhtien}}</td>
-                            {% endfor %}
-                            
+                                <td align="right">{{cthd.thanhtien}}</td>              
                         </tbody>
-
+                    {% endfor %}
                     </table>
                     <label>Tổng tiền: {{hoadon.tongtien}}</label>
 
@@ -60,6 +59,7 @@
                 <a href="{{ path('bill_index') }}" class="btn btn-primary" >Back to the list</a>
                 <a href="#" class="btn btn-warning">Edit</a>
                 <a class="deleteCustomer btn btn-danger" href="#" >Delete</a>
+                <a class="btn btn-primary" target="_blank" href="{{ path('bill_print', { 'id': hoadon.id }) }}">Print</a>
              </ul>
     </div>
 </div>

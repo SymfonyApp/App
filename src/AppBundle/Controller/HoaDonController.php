@@ -158,6 +158,30 @@ class HoaDonController extends Controller
             'hoadon' => $hoadon,
         ));
     }
+    /**
+     * Find Print a hoaDon entity.
+     *
+     * @Route("/print/{id}", name="bill_print")
+     * @Method("GET")
+     */
+    public function PrintAction(HoaDon $hoadon)
+    {
+
+        $snappy =$this->get("knp_snappy.pdf");
+        $snappy->setOption("encoding", "UTF-8");
+
+        $html= $this->renderView('hoadon/print.html.twig',array('hoadon'=>$hoadon));
+
+        $filename='abc';
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'=> 'application/pdf',
+                'Content-Disposition'=> 'inline; filename="'.$filename.'.pdf"'
+            )
+        );
+    }
 
 
 }
