@@ -182,6 +182,28 @@ class HoaDonController extends Controller
             )
         );
     }
+    /**
+     * Deletes a hoadon entity.
+     *
+     * @Route("/delete/{id}", name="bill_delete", options={"expose"=true})
+     * @Method({"DELETE","GET"})
+     * @param HoaDon $id
+     * @return Response
+     */
+    public function deleteAction(HoaDon $id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        foreach ($id->cthds as $cthd) {
+            $em->remove($cthd);
+        }
+        $em->remove($id);
+        $em->flush();
+        if($request->getMethod()=="GET")
+        {
+            return $this->redirect($this->generateUrl("bill_index"));
+        }
+        return new Response();   
+    }
 
 
 }

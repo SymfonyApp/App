@@ -77,5 +77,22 @@
             }
             
         })                
-
+        $(document).on('click','.deleteBill',function(e){
+            var id = $(this).attr("data-playgroup-id");
+            if(confirm("Are you sure you want to delete this Record?")){
+                $.ajax({
+                    type: 'delete',
+                    url:  '../hoadon/delete/'+ id,
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        location.reload();
+                        console.log("borrado");
+                    },
+                    error: function (response) {
+                        console.log("no borrado");
+                    }
+                });
+            }
+            
+        })
  });

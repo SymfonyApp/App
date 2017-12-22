@@ -58,7 +58,7 @@
             <ul>
                 <a href="{{ path('bill_index') }}" class="btn btn-primary" >Back to the list</a>
                 <a href="#" class="btn btn-warning">Edit</a>
-                <a class="deleteCustomer btn btn-danger" href="#" >Delete</a>
+                <a class="deleteCustomer btn btn-danger" href="{{ path('bill_delete', { 'id': hoadon.id }) }}" >Delete</a>
                 <a class="btn btn-primary" target="_blank" href="{{ path('bill_print', { 'id': hoadon.id }) }}">Print</a>
              </ul>
     </div>
