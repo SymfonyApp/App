@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class HoaDonRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function DoanhThuNam($nam)
+	{
+		return $this->getEntityManager()->createQuery(
+
+			'SELECT MONTH(h.ngaygiao) AS thang, SUM(h.tongtien) AS tongtien 
+			FROM AppBundle:HoaDon h
+			WHERE YEAR(h.ngaygiao) = :nam AND h.trangthai = :trangthai
+			GROUP BY thang'
+		)
+		->setParameter('nam',$nam)->setParameter('trangthai','Đã giao')
+		->getArrayResult();
+
+	}
 }
+
