@@ -25,14 +25,26 @@ class ApiUserController extends Controller
      */
     public function loginAction(Request $request)
     {
+        
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $data = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($data) ? $data : array());
+        }
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('AppBundle:User')->findAll();
-
-        $username = $request->request->get('username');    
-        $token =$this->get('lexik_jwt_authentication.encoder')->encode(['username'=> '1234']);
-
-        $s = $this->get('lexik_jwt_authentication.encoder')->decode($token);
-        return new JsonResponse(['token'=>$username]);
+        $user = $em->getRepository('AppBundle:User')->findOneBy(['username'=>$data['username']]);
+        if(!$user)
+        {
+            throw $this->creteNotFountExeption();            
+        }
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($user);
+        if($encoder->isPasswordValid($user->getPassword(),$data['password'],$user->getSalt()))
+        {
+            $token =$this->get('lexik_jwt_authentication.encoder')->encode(['data'=> $data]);
+            //$s = $this->get('lexik_jwt_authentication.encoder')->decode($token);
+            return new JsonResponse(['token'=>$token]);        
+        }
+        return new JsonResponse(['message'=>'Incorrect password'], Response::HTTP_FAILED_DEPENDENCY);
     }
 
 }
