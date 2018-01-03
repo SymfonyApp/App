@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 class ApiUserController extends Controller
 {
+
     /**
-     * Lists all user entities.
      *
      * @Route("/login", name="user_login")
      * @Method("POST")
@@ -46,5 +46,73 @@ class ApiUserController extends Controller
         }
         return new JsonResponse(['message'=>'Incorrect password'], Response::HTTP_FAILED_DEPENDENCY);
     }
+    /**
+     * @Route("/user", name ="api_user_index") 
+     * 
+     */
+    public function indexAction()
+    {
+        $em= $this->getDoctrine()->getManager();
+        $users =$em->getRepository('AppBundle:User')->findAll();
 
+        $serializer = $this->get('jms_serializer');
+        $listuser = $serializer->serialize($users, 'json');
+       // return new Response(json_encode($listuser), 200);
+       return new JsonResponse(json_decode($listuser),200);
+    }
+    /**
+     * @Route("/user/{id}", name="api_user_show")
+     * @Method("GET")
+     */
+    public function showAction($id)
+    {
+        $em= $this->getDoctrine()->getManager();
+        $user =$em->getRepository('AppBundle:User')->findOneBy(['id'=>$id]);
+        if($user === null)
+        {
+            return new JsonResponse('Count not find user with id = '.$id ,500);
+        }
+        $serializer = $this->get('jms_serializer');
+        $usershow = $serializer->serialize($user, 'json');
+        return new JsonResponse(json_decode($usershow), 200);
+    }
+    /**
+     * @Route("/user/create", name="api_user_create")
+     * @Method("POST")
+     */
+    public function createAction(Request $request)
+    {
+        $token =$request->get('token');
+        $usertoken = $this->get('lexik_jwt_authentication.encoder')->decode($token);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->findOneBy(['username'=>$usertoken['data']['username']]);
+        if(!$user)
+        {
+            throw $this->creteNotFountExeption();            
+        }
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($user);
+        if($encoder->isPasswordValid($user->getPassword(),$usertoken['data']['password'],$user->getSalt()))
+        {
+            if (0 === strpos($request->headers->get('Content-Type'), 'application/json'))
+            {
+                $data = json_decode($request->getContent(), true);
+                $request->request->replace(is_array($data) ? $data : array());
+                $usernew= new User();
+                    $usernew->setUsername($data['username']);
+                    $usernew->setRole($data['role']);
+                    $usernew->setEmail($data['email']);
+                    $encoderpass = $this->container->get('security.password_encoder');
+                    $encodedpass = $encoderpass->encodePassword($usernew,$data['password']);
+                    $usernew->setPassword($encodedpass);
+                    $em->persist($usernew);
+                    $em->flush();
+                $serializer = $this->get('jms_serializer');
+                $usershow = $serializer->serialize($usernew, 'json');
+                return new JsonResponse(json_decode($usershow), 200);
+            }
+        }
+        return new JsonResponse(['message'=>'token fail'], Response::HTTP_FAILED_DEPENDENCY);
+
+    }
 }
