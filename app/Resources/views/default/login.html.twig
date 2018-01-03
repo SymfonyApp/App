@@ -23,9 +23,11 @@
                     <div class="alert " >{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
                 <input type="submit" value="Login"/><br><br>
-                <a href="{{ path('forgot') }}">Forgot Password</a>
-        </div>
+                <a href="{{ path('forgot') }}">Forgot Password</a><br><br>
+                <a href="{{ path('register') }}">Register</a>
+                
     </div>
+
 </form>
 {% endblock %}
 

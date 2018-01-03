@@ -61,5 +61,10 @@ class LoginController extends Controller
         return $this->render('default/forgot.html.twig', array(
         ));
     }
+    public function registerAction()
+    {
+
+        return $this->render('default/register.html.twig', array());
+    }
 
 }
