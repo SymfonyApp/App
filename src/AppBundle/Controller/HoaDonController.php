@@ -35,7 +35,28 @@ class HoaDonController extends Controller
         $em = $this->getDoctrine()->getManager();
         $tmp= array();
         $tmp = $session->get('cthd');
+
         $sanpham = $em->getRepository('AppBundle:SanPham')->findOneById($request->request->get('_idsp'));
+        //xử lí khi sản phẩm đã tồn tại
+        if(count($tmp)!=0)
+        {
+            $i=0;
+            foreach ($tmp as $t) {
+                if($t->getSP()->getId()==$request->request->getInt('_idsp'))
+                {
+                    //$tmp[$i]->setSl()= $t->getSl() + $request->request->getInt('_sl');
+                    $tmp[$i]->setSl($t->getSl()+$request->request->getInt('_sl'));
+                    $tmp[$i]->setThanhtien($t->getDongia()*$t->getSl());
+                    $session->set('cthd',$tmp);
+                    $cthds= $session->get('cthd');  
+                       return $this->render('hoadon/tablecthd.html.twig', array(
+                             'cthds'=>$cthds
+                       ));
+                }
+                $i=$i+1;
+            }
+        }
+        //xử lí khi chưa có sản phẩm nào 
         $chitiet=new ChiTietHD();
             $chitiet->setSl($request->request->get('_sl'));
             $chitiet->setTensp($sanpham->getTensp());
@@ -45,17 +66,16 @@ class HoaDonController extends Controller
         $tmp[count($tmp)]= $chitiet;
         $session->set('cthd',$tmp);
         //xử lí trả về dữ liệu hiển thị
-
          //$session->start();
          $cthds= $session->get('cthd');      
        return $this->render('hoadon/tablecthd.html.twig', array(
              'cthds'=>$cthds
        ));
-       //return new Response();
-        //còm xử lí delete với nếu như chọn sản phẩm trùng nhau.
+
     }
+
     /**
-     * 
+
      *
      * @Route("/new", name="bill_new")
      * 
@@ -203,6 +223,25 @@ class HoaDonController extends Controller
             return $this->redirect($this->generateUrl("bill_index"));
         }
         return new Response();   
+    }
+    /**
+     * Deletes a cthd entity.
+     *
+     * @Route("/deletecthd/{id}", name="bill_delete_cthd", options={"expose"=true})
+     * @Method("DELETE")
+     * @return Response
+     */
+    public function deletecthdAction($id, Request $request)
+    {   
+        $session = new Session();
+        $tmp= array();
+        $tmp = $session->get('cthd');
+        array_splice($tmp, $id, 1);
+        $session->set('cthd',$tmp);
+        $cthds= $session->get('cthd');
+        return $this->render('hoadon/tablecthd.html.twig', array(
+                            'cthds'=>$cthds
+        ));
     }
 
 

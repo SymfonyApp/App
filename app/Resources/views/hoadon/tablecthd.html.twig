@@ -9,6 +9,7 @@
             </tr>
         </thead>
         {% set sum = 0 %}
+        {%  set  vt = 0 %}
         {% for cthd in cthds %}
         <tbody>
             <td>{{cthd.tensp}}</td>
@@ -16,7 +17,8 @@
             <td>{{cthd.dongia}}</td>
             <td>{{cthd.thanhtien}}</td>
                {% set sum = sum + cthd.thanhtien %} 
-            <td><a class="deleteCTHD btn btn-danger" data-playgroup-id ="{{ cthd.sanpham.id }}" >Delete</a></td>
+            <td><a class="deleteCTHD btn btn-danger" data-playgroup-id ="{{ vt }}" >Delete</a></td>
+            {% set vt = vt + 1 %} 
         </tbody>
         {% endfor %}
         <tbody>
