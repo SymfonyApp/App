@@ -5,16 +5,20 @@
 {% endblock %}
 
 {% block body %}
-	<div class="row">
-		{% for product in products %}
-			<div class="card" style="width: 20rem;">
-				<img class="card-img-top img-fluid" src=" " alt="Card image cap">
-				<div class="card-block">
-					<a href="{{ path('app_product_details', { 'id': product.id }) }}" ><h4 class="card-title">{{product.tensp}}</h4></a>
-					<p class="card-text">{{ product.gia}} </p>
-				</div>
-			</div><!--end of card -->
-
-		{%endfor%}
-	</div>
+<div class="content">
+  <div class="container">
+  <h2 class="tittle">Products</h2>
+  	<div class="row">
+  		{% for product in products %}
+  			<div class="card" style="width: 20rem;">
+  				<img class="card-img-top img-fluid" src=" " alt="Card image cap">
+  				<div class="card-block">
+  					<a href="{{ path('app_product_details', { 'id': product.id }) }}" ><h4 class="card-title">{{product.tensp}}</h4></a>
+  					<p class="card-text">{{ product.gia}} </p>
+  				</div>
+  			</div><!--end of card -->
+  		{%endfor%}
+    </div><!--end of row -->
+  </div>
+</div>
 {% endblock %}
