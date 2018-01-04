@@ -1,0 +1,49 @@
+{% extends 'theme.html.twig' %}
+
+{% block body %}
+<h1>SHOPPING-CART</h1>
+
+<ul class="thumbnails">
+
+{% if empty %}
+<h5>Your shopping cart is empty.</h5>
+{% endif %}
+{% set cart = app.session.get('cart') %}
+
+
+{% if product %}
+
+
+<ul class="thumbnails">
+{% if app.session.hasFlash('notice') %}
+
+ <divclass="flash-notice">
+
+  {{app.session.flash('notice') }}
+  {{ app.session.removeFlash('notice') }}
+
+ </div>
+
+{% endif %}
+{% for key, item in cart %}
+    <p>ID:{{ key }}</p>
+     <p>Quantity:{{ item }}</p>
+     <button class="btn btn-primary"><a href="{{ path('cart_remove', {'id': key}) }}">Remove</a></button>
+
+   {% for item in product %}
+        <p>{{ item.title }}</p>
+    <p>{{ item.preview }}</p>
+{% endfor %}
+
+
+
+{% endfor %}
+</ul>
+
+{% endif %}
+</ul>
+
+<a href="{{ path('products') }}">Products</a>
+
+{% endblock %}
+Please help me with this.
