@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CartController extends Controller
 {
     /**
-     * @Route("/cart/add")
+     * @Route("/cart/add", name="cart_add")
      */
      public function addAction($id)
     {
@@ -52,7 +52,7 @@ class CartController extends Controller
     }
 
     /**
-     * @Route("/cart")
+     * @Route("/cart", name="cart")
      */
      public function indexAction()
    {
@@ -88,7 +88,7 @@ class CartController extends Controller
    }
 
     /**
-     * @Route("/cart/remove/{$id}")
+     * @Route("/cart/remove/{$id}", name="cart_remove")
      */
      public function removeAction($id)
      {
