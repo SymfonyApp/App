@@ -4,6 +4,7 @@
   {% if is_granted('ROLE_ADMIN') %}
     <li ><a href="{{ path('user_index') }}"><i class="glyphicon glyphicon-user"></i> <span>User</span></a></li>
   {% endif %}
+  <li ><a href="{{ path('customer_index') }}"><i class="glyphicon glyphicon-user"></i> <span>Khách Hàng</span></a></li>
   <li ><a href="{{ path('product_index') }}"><i class="glyphicon glyphicon-apple"></i> <span>Sản Phẩm</span></a></li>
   <li><a href="{{ path('bill_index') }}"><i class="glyphicon glyphicon-list-alt"></i> <span>Hóa Đơn</span></a></li>
   <li class="treeview">
