@@ -1,5 +1,20 @@
 {% extends 'theme.html.twig' %}
 
-{% block body %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/app/css/products.css') }}">
+{% endblock %}
 
+{% block body %}
+	<div class="row">
+		{% for product in products %}
+			<div class="card" style="width: 20rem;">
+				<img class="card-img-top img-fluid" src=" " alt="Card image cap">
+				<div class="card-block">
+					<a href="{{ path('app_product_details', { 'id': product.id }) }}" ><h4 class="card-title">{{product.tensp}}</h4></a>
+					<p class="card-text">{{ product.gia}} </p>
+				</div>
+			</div><!--end of card -->
+
+		{%endfor%}
+	</div>
 {% endblock %}

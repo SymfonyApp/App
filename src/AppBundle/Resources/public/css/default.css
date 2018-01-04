@@ -84,18 +84,6 @@ ul{
 
 /*header*/
 
-/*nav*/
-nav {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: #fff;
-}
-
-nav li { background: #f8f8f8; }
-
-/*nav*/
-
 /*footer*/
 footer{
 	background-color: #000;

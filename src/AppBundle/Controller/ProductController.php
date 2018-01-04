@@ -12,9 +12,17 @@ class ProductController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('product/index.html.twig', array(
-            // ...
-        ));
+        $em = $this->getDoctrine()->getManager();
+
+        $product = $em->getRepository('AppBundle:User')->findAll();
+        /**
+        *@var $paginator \Knp\Component\Pager\Paginator
+        */
+        $paginator = $this->get('knp_paginator');
+        $products = $paginator->paginate($product,
+        $request->query->getInt('page',1),
+        $request->query->getInt('limit',10));
+        return $this->render('product/index.html.twig', array('products'=>$products));
     }
 
     /**
@@ -22,7 +30,7 @@ class ProductController extends Controller
      */
     public function detailsAction($id)
     {
-        return $this->render('AppBundle:Product:details.html.twig', array(
+        return $this->render('product/details.html.twig', array(
             // ...
         ));
     }
