@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/default.css') }}">
+    </head>
+    <body>
+      <div id="MainWrapper">
+        <!--Header-->
+        <header>
+          <div class="header-top">
+            <div class="container">
+              <div class="top-left"><a href="#"> <i class="fa fa-phone" aria-hidden="true"></i> +84-1676-825-746 </a> &thinsp; <a href="#"> <i class="fa fa-envelope" aria-hidden="true"></i> jientdongocsp@gmail.com</a></div>
+                <div class="top-right">
+                  <ul>
+                      <li><a href="{{ path('login') }}">Log in</a></li>
+                      <li><a href="{{ path('register') }}">Register</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--NAV bar-->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                  <div class="navbar-header">
+                       <a href="#" class="navbar-brand">Demo</a>
+                        <ul class="nav navbar-nav">
+                          <li><a href="#">Menu</a></li>
+                          <li><a href="#">Contact Us</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                          <li>
+                            <a href="#"> Cart (0)</a>
+                          </li>
+                        </ul>
+                   </div>
+            </div>
+         </nav>
+          <!--NAV bar-->
+        </header>
+        <!--Header-->
+
+        <div id="content">
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+
+        <!--footer-->
+        <footer>
+          <div class="copy-section">
+              <div class="container">
+                  <div class="footer-top">
+                      <p>&copy; 2017 Demo. All rights reserved | Design by Jient</p>
+                  </div>
+              </div>
+          </div>
+        </footer>
+        <!--footer-->
+      </div>
+
+
+      <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
