@@ -2,10 +2,10 @@
   <li class="header">MENU</li>
   <!-- Optionally, you can add icons to the links -->
   {% if is_granted('ROLE_ADMIN') %}
-    <li class="active"><a href="{{ path('user_index') }}"><i class="glyphicon glyphicon-user"></i> <span>User</span></a></li>
+    <li ><a href="{{ path('user_index') }}"><i class="glyphicon glyphicon-user"></i> <span>User</span></a></li>
   {% endif %}
-  <li ><a href="#"><i class="glyphicon glyphicon-apple"></i> <span>Sản Phẩm</span></a></li>
-  <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> <span>Hóa Đơn</span></a></li>
+  <li ><a href="{{ path('product_index') }}"><i class="glyphicon glyphicon-apple"></i> <span>Sản Phẩm</span></a></li>
+  <li><a href="{{ path('bill_index') }}"><i class="glyphicon glyphicon-list-alt"></i> <span>Hóa Đơn</span></a></li>
   <li class="treeview">
     <a href="#"><i class="glyphicon glyphicon-signal"></i> <span>Doanh Thu</span>
       <span class="pull-right-container">
@@ -13,8 +13,8 @@
         </span>
     </a>
     <ul class="treeview-menu">
-      <li><a href="#">Link in level 2</a></li>
-      <li><a href="#">Link in level 2</a></li>
+      <li><a href="#">Doanh thu tháng</a></li>
+      <li><a href="{{ path('doanhthu_nam')}}">Doanh thu năm</a></li>
     </ul>
   </li>
 </ul>

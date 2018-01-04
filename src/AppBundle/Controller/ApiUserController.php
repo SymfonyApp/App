@@ -115,4 +115,37 @@ class ApiUserController extends Controller
         return new JsonResponse(['message'=>'token fail'], Response::HTTP_FAILED_DEPENDENCY);
 
     }
+    /**
+     * @Route("/user/delete/{id}", name="api_user_show")
+     * @Method("DELETE")
+     */
+    public function deleteAction($id, Request $request)
+    {
+        $token =$request->get('token');
+        $usertoken = $this->get('lexik_jwt_authentication.encoder')->decode($token);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->findOneBy(['username'=>$usertoken['data']['username']]);
+        if(!$user)
+        {
+            throw $this->creteNotFountExeption();            
+        }
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($user);
+        if($encoder->isPasswordValid($user->getPassword(),$usertoken['data']['password'],$user->getSalt()))
+        {
+            $user =$em->getRepository('AppBundle:User')->findOneBy(['id'=>$id]);
+            if($user === null)
+            {
+                return new JsonResponse('Count not find user with id = '.$id ,500);
+            }
+
+            $em->remove($user);
+            $em->flush();
+            return new JsonResponse(['message'=>'deleted user'], 200);
+            
+        }
+        return new JsonResponse(['message'=>'token fail'], Response::HTTP_FAILED_DEPENDENCY);
+
+        
+    }
 }
