@@ -25,7 +25,24 @@
             {
                 alert('Số lượng từ 1 trở lên');
             }
-            
+
+        })
+        $(document).on('click','.deleteCTHD',function(e){
+            var id = $(this).attr("data-playgroup-id");
+            if(confirm("Are you sure you want to delete this Record?")){
+                $.ajax({
+                    type: 'delete',
+                    url:  '../hoadon/deletecthd/'+ id,
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        $("#table_cthd").html(response);
+                        console.log("borrado");
+                    },
+                    error: function (response) {
+                        console.log("no borrado");
+                    }
+                });
+            }
             
         })
  });
